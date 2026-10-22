@@ -1,0 +1,8 @@
+{
+  "name": "Remix pluma y tiempo",
+  "description": "Suite integral para escritores: biblioteca de proyectos, capítulos, cuentas con usuario y contraseña, paletas de colores dinámicas, fichas de personajes y línea de tiempo narrativa interactiva.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

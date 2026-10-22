@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-10-22T14:06:17.196Z",
+  "users": [
+    {
+      "id": "usr_1792677977195_buhh",
+      "username": "gabriel_test",
+      "displayName": "Gabriel García",
+      "passwordHash": "b833afd8bf796aff2a33b6cc5ee8d5952031359a0008943c671ee28e57f67acb",
+      "avatarColor": "#1B3B5C",
+      "createdAt": "2026-10-22T14:06:17.195Z",
+      "lastLoginAt": "2026-10-22T14:06:17.195Z"
+    }
+  ],
+  "books": [],
+  "chapters": [],
+  "characters": [],
+  "characterCategories": [],
+  "details": [],
+  "detailCategories": [],
+  "ideas": [],
+  "ideaCategories": [],
+  "timelineTracks": [],
+  "timelineLanes": [],
+  "timelineCategories": [],
+  "timelineEvents": [],
+  "timelineConnections": [],
+  "writingLogs": [],
+  "customPalettes": [],
+  "backups": []
+}

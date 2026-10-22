@@ -1,0 +1,616 @@
+# ACTUALIZACIÓN AVANZADA DE LA APLICACIÓN: LÍNEA DE TIEMPO INFINITA, CONEXIONES, PALETAS Y PERSONALIZACIÓN
+
+Actúa como un ingeniero de software sénior especializado en React, TypeScript, interfaces interactivas, visualización de datos y aplicaciones para escritores.
+
+Quiero que implementes una actualización profunda sobre la aplicación existente. No construyas otra aplicación desde cero. Inspecciona el código actual, identifica los componentes que deben modificarse y conserva los libros, capítulos, personajes, imágenes, categorías, ideas, audios y demás datos existentes.
+
+La prioridad de esta actualización es crear una línea de tiempo narrativa amplia, interactiva, navegable, configurable y persistente, junto con mejoras en las categorías, los colores y las fuentes de la aplicación.
+
+No reemplaces funciones reales por interfaces de demostración. Cada botón, menú, punto, conexión y control debe ejecutar su función correspondiente.
+
+# 1. LÍNEA DE TIEMPO VERDADERAMENTE INTERACTIVA
+
+La línea de tiempo debe ser una de las áreas principales de la aplicación y disponer de un espacio amplio para trabajar.
+
+No quiero una imagen estática, una lista de fechas ni un gráfico que solo permita desplazarse por un intervalo predeterminado. Necesito un lienzo interactivo donde pueda crear, mover, conectar, editar, ocultar y consultar acontecimientos.
+
+## 1.1. Navegación temporal sin límites artificiales
+
+La línea de tiempo debe permitir navegar continuamente hacia el pasado y hacia el futuro.
+
+Implementa:
+- Desplazamiento horizontal mediante arrastre.
+- Desplazamiento con la rueda del ratón cuando corresponda.
+- Zoom de acercamiento y alejamiento.
+- Controles para avanzar y retroceder temporalmente.
+- Botón para volver al acontecimiento seleccionado.
+- Botón para centrar la línea de tiempo.
+- Indicador de la escala temporal actual.
+- Navegación por fechas y acontecimientos.
+- Soporte para periodos históricos, fechas futuras, años negativos y calendarios ficticios.
+
+No impongas un año inicial o final fijo. El usuario debe poder seguir desplazándose a través del pasado y del futuro sin encontrar un borde artificial del lienzo.
+
+Implementa un sistema de coordenadas y una escala temporal que permitan representar fechas lejanas sin perder precisión.
+
+Para evitar problemas numéricos al trabajar con años extremadamente grandes, separa la referencia temporal del desplazamiento visual del lienzo. No dependas de números de punto flotante gigantes para calcular cada posición.
+
+Distingue entre:
+- Fecha absoluta.
+- Fecha aproximada.
+- Tiempo relativo a otro acontecimiento.
+- Tiempo ficticio personalizado.
+- Acontecimiento sin fecha definida.
+
+No inventes fechas absolutas cuando solo se conoce una relación temporal.
+
+## 1.2. Tres modos de visualización temporal
+
+Crea un selector visible para cambiar entre los siguientes modos.
+
+### Modo A: Línea simple con conexiones
+
+Muestra un eje temporal principal con puntos y líneas que conectan los acontecimientos relacionados.
+
+Características:
+- Los puntos deben ser pequeños y minimalistas.
+- Las conexiones deben verse como líneas o flechas reales entre los puntos.
+- No muestres descripciones largas de forma permanente.
+- El nombre debe aparecer al pasar el cursor o seleccionar el punto.
+- Al hacer clic, debe abrirse la ficha completa del acontecimiento.
+- Las conexiones deben seguir unidas a sus puntos cuando estos se muevan.
+
+Este modo debe priorizar la limpieza visual y permitir comprender rápidamente las relaciones entre eventos.
+
+### Modo B: Varias líneas de tiempo de una misma historia
+
+Permite crear varias líneas temporales dentro de un mismo libro.
+
+Por ejemplo:
+- Línea principal de la historia.
+- Línea de vida de un personaje.
+- Línea de acontecimientos políticos.
+- Línea histórica del mundo.
+- Línea de una familia.
+- Línea de una trama secundaria.
+
+Cada línea debe tener:
+- Nombre.
+- Descripción.
+- Color.
+- Categoría.
+- Visibilidad independiente.
+- Acontecimientos propios.
+- Relaciones con acontecimientos de otras líneas.
+
+Muestra las líneas paralelas en carriles horizontales independientes que compartan una escala temporal común cuando utilicen el mismo calendario.
+
+Permite crear, renombrar, reordenar, ocultar y eliminar líneas temporales.
+
+Un acontecimiento puede relacionarse con otro de una línea diferente. Sus conexiones deben seguir funcionando aunque se oculte temporalmente uno de los carriles.
+
+No dupliques un mismo acontecimiento para mostrarlo en varias líneas si puede resolverse mediante referencias al mismo registro.
+
+Cuando dos líneas usen calendarios incompatibles, no asumas que sus posiciones temporales son comparables. Permite al usuario establecer una relación o referencia explícita.
+
+### Modo C: Eje cronológico con escala adaptable
+
+Crea una línea de tiempo que cambie automáticamente su nivel de detalle según el zoom.
+
+Al alejarse, debe mostrar:
+- Siglos.
+- Décadas.
+- Años.
+
+Al acercarse, debe mostrar:
+- Meses.
+- Semanas.
+- Días.
+- Horas.
+- Minutos, si la escala y la precisión de los acontecimientos lo permiten.
+
+El cambio de escala debe ser progresivo y mantener la posición temporal del área enfocada.
+
+Ejemplo:
+1. Vista general de varios siglos.
+2. Acercamiento a una década.
+3. Acercamiento a un año.
+4. Acercamiento a un mes.
+5. Acercamiento a un día.
+6. Acercamiento a un intervalo de una hora.
+
+El usuario debe poder seguir profundizando hasta el nivel de una hora y regresar a una vista de años o siglos.
+
+No asumas que todos los acontecimientos tienen precisión horaria. Si un evento solo tiene un año conocido, debe conservar esa precisión y mostrarse como fecha aproximada o anual.
+
+Cuando el proyecto utilice calendarios ficticios, permite definir unidades temporales personalizadas y no conviertas automáticamente esas fechas a calendarios reales.
+
+# 2. LÍNEA DE TIEMPO GRANDE Y MODO DE TRABAJO AMPLIADO
+
+Añade un botón destacado llamado «Ampliar línea de tiempo».
+
+Al pulsarlo:
+- El lienzo debe ocupar casi toda la ventana.
+- Se deben ocultar los paneles laterales que no sean esenciales.
+- La navegación y el zoom deben seguir disponibles.
+- El usuario debe poder crear y editar puntos y conexiones.
+- Las líneas y los acontecimientos deben seguir siendo interactivos.
+- Debe existir un botón claro para regresar a la vista normal.
+
+Incluye una opción de pantalla completa real cuando el navegador lo permita.
+
+Al salir del modo ampliado, conserva la posición del lienzo, el zoom, los filtros y las modificaciones.
+
+La línea de tiempo debe ser suficientemente grande para trabajar con historias extensas, muchas conexiones y múltiples carriles sin que la interfaz se vuelva ilegible.
+
+# 3. PRESENTACIÓN MINIMALISTA DE LOS PUNTOS Y LAS CONEXIONES
+
+## 3.1. Puntos sin etiquetas permanentes
+
+Por defecto, cada acontecimiento debe mostrarse como un punto pequeño, sin descripción ni texto extenso.
+
+Comportamiento:
+- Al pasar el cursor sobre un punto, muestra una etiqueta emergente con su nombre.
+- En dispositivos táctiles, permite tocar el punto para mostrar su nombre.
+- Al hacer clic en el punto o seleccionar su etiqueta, abre su ficha completa.
+- La ficha debe mostrar toda la información, las relaciones y los controles de edición.
+
+La ficha de un acontecimiento debe incluir:
+- Nombre.
+- Descripción.
+- Fecha y precisión temporal.
+- Categoría.
+- Color.
+- Personajes.
+- Capítulos relacionados.
+- Imágenes.
+- Notas.
+- Subpuntos.
+- Conexiones entrantes y salientes.
+- Línea temporal a la que pertenece.
+
+Permite cerrar la ficha sin cambiar la posición del lienzo.
+
+## 3.2. Conexiones sin etiquetas permanentes
+
+Las conexiones también deben ser minimalistas.
+
+Por defecto, muestra únicamente la línea o flecha.
+
+Al pasar el cursor o tocar la conexión, muestra su nombre. Al seleccionarla, abre una ficha que incluya:
+- Nombre de la relación.
+- Descripción.
+- Tipo de relación.
+- Punto de origen.
+- Punto de destino.
+- Color.
+- Dirección.
+- Personajes y acontecimientos relacionados.
+- Notas.
+
+Las conexiones deben conservar sus extremos correctos y actualizar su geometría cuando se muevan los puntos.
+
+En líneas temporales densas, utiliza rutas curvas, desplazamientos y técnicas de separación visual para reducir las superposiciones.
+
+# 4. DOS PANELES INDEPENDIENTES Y PLEGABLES
+
+Crea dos ventanas auxiliares para administrar la línea de tiempo. Ambas deben poder abrirse y cerrarse mediante botones independientes.
+
+No deben ocupar demasiado espacio cuando estén abiertas.
+
+## 4.1. Panel de administración de elementos
+
+Debe ser pequeño, plegable y conectado con el lienzo.
+
+Incluye pestañas:
+- Puntos.
+- Subpuntos.
+- Conexiones.
+- Líneas temporales.
+
+Desde este panel se debe poder:
+- Buscar elementos.
+- Seleccionar y localizar puntos.
+- Crear acontecimientos.
+- Crear subpuntos.
+- Crear conexiones.
+- Editar nombres y descripciones.
+- Cambiar categorías.
+- Cambiar colores.
+- Ocultar y mostrar elementos.
+- Eliminar elementos con confirmación.
+- Navegar a las fichas relacionadas.
+
+Cuando se seleccione un registro, el lienzo debe centrar o resaltar el elemento correspondiente.
+
+Si se modifica un acontecimiento desde el panel, la actualización debe reflejarse inmediatamente en el lienzo y en el resto de la aplicación.
+
+## 4.2. Panel de creación y edición rápida
+
+Crea una segunda ventana independiente para crear puntos y conexiones.
+
+Debe ser compacta, plegable y permitir trabajar sin abandonar la línea de tiempo.
+
+### Crear un punto
+
+Campos:
+- Nombre.
+- Fecha o tiempo relativo.
+- Línea temporal.
+- Categoría.
+- Color.
+- Posición temporal.
+- Personajes relacionados.
+- Capítulos relacionados.
+- Descripción opcional.
+
+Debe incluir un selector de posición temporal con dos opciones:
+
+**Posición automática:** el usuario indica la fecha y el sistema coloca el punto según la escala temporal.
+
+**Posición manual:** el usuario introduce las coordenadas o ajusta la posición mediante controles visuales, con la posibilidad de mover el punto directamente sobre el lienzo.
+
+En el modo manual, separa claramente la posición visual de la fecha narrativa. Permite mover un punto sin alterar su fecha y, cuando corresponda, ofrece una acción explícita para sincronizar ambas.
+
+No permitas que un cambio de posición visual modifique silenciosamente la cronología narrativa.
+
+### Crear una conexión
+
+Campos:
+- Nombre de la conexión.
+- Punto de origen.
+- Punto de destino.
+- Tipo de relación.
+- Color.
+- Dirección.
+- Descripción.
+- Notas.
+
+Permite crear una conexión seleccionando dos puntos del lienzo, sin tener que escribir sus identificadores.
+
+También debe poder hacerse desde el panel de edición.
+
+# 5. CREACIÓN DE CONEXIONES ENTRE CINCO PUNTOS
+
+Implementa la posibilidad de crear una cadena de conexiones que involucre hasta cinco puntos en una misma operación.
+
+Ejemplo:
+A → B → C → D → E
+
+El usuario debe poder seleccionar hasta cinco puntos y decidir cómo conectarlos.
+
+Ofrece las siguientes opciones:
+- Conexión secuencial entre los puntos seleccionados.
+- Conexiones manuales entre pares de puntos.
+- Conexiones dirigidas.
+- Conexiones sin dirección.
+- Conexiones de ida y vuelta cuando tengan sentido.
+
+El límite de cinco puntos corresponde a la herramienta de creación rápida de una cadena, no a la cantidad total de puntos o conexiones que puede tener la historia.
+
+La aplicación debe permitir conectar acontecimientos existentes de cualquier distancia temporal y de distintas líneas de tiempo.
+
+Cada conexión debe conservar un identificador único, un origen, un destino y sus propios metadatos.
+
+Evita crear conexiones duplicadas accidentalmente y permite que el usuario decida si quiere reutilizar una conexión existente o crear otra con una función narrativa distinta.
+
+# 6. CUADRÍCULA COMPLETA DE COLORES PARA PUNTOS Y CONEXIONES
+
+Crea un selector visual de colores en forma de cuadrícula.
+
+Debe ser amplio, ordenado y fácil de usar, con colores agrupados por familias:
+- Rojos.
+- Naranjas.
+- Amarillos.
+- Verdes.
+- Turquesas.
+- Azules.
+- Violetas.
+- Rosados.
+- Marrones.
+- Grises.
+- Blanco.
+- Negro.
+
+Incluye variantes claras, medias y oscuras de cada familia.
+
+Cada muestra debe permitir:
+- Previsualizar el color.
+- Seleccionarlo con un clic.
+- Ver su código hexadecimal.
+- Aplicarlo al punto o conexión seleccionados.
+- Cambiarlo posteriormente.
+
+Incluye un selector de color personalizado para elegir cualquier color.
+
+Permite utilizar colores diferentes en puntos y conexiones, independientemente de la paleta general de la página.
+
+No limites los colores de los acontecimientos a los colores de la interfaz. La paleta visual del sitio y los colores narrativos de los elementos deben ser configuraciones independientes.
+
+Guarda los colores de cada elemento y consérvalos al cerrar y reabrir el libro.
+
+Asegura que las líneas y puntos se distingan correctamente del fondo seleccionado.
+
+# 7. CATEGORÍAS AMPLIABLES PARA PERSONAJES
+
+Amplía el sistema de clasificación de personajes.
+
+No limites las categorías a protagonista, antagonista y secundario.
+
+Incluye categorías iniciales sugeridas como:
+- Protagonista.
+- Antagonista.
+- Deuteragonista.
+- Tritagonista.
+- Personaje secundario.
+- Personaje de apoyo.
+- Personaje recurrente.
+- Personaje episódico.
+- Mentor.
+- Aliado.
+- Rival.
+- Confidente.
+- Interés romántico.
+- Personaje coral.
+- Narrador.
+- Personaje histórico.
+- Personaje simbólico.
+- Personaje enigmático.
+- Otro.
+
+Estas categorías son sugerencias iniciales y no deben ser obligatorias ni exclusivas.
+
+El usuario debe poder:
+- Crear categorías nuevas.
+- Renombrar las existentes.
+- Cambiar su orden.
+- Asignar colores.
+- Eliminar categorías.
+- Restaurar las categorías predeterminadas.
+- Asignar varias etiquetas a un mismo personaje cuando corresponda.
+
+Distingue entre el rol narrativo, el tipo de personaje y otras etiquetas descriptivas cuando sea útil.
+
+Por ejemplo, un personaje puede ser antagonista y mentor en diferentes etapas de la historia. No obligues a que pertenezca a una sola categoría si el usuario necesita varias.
+
+Si se elimina una categoría, conserva las fichas de los personajes y permite reasignar o retirar la categoría sin perder el resto de la información.
+
+# 8. AMPLIACIÓN Y REDISEÑO DE LAS PALETAS DE LA INTERFAZ
+
+Actualiza las cinco paletas predeterminadas existentes.
+
+Quiero que sus colores sean más visibles y que se aprecie mejor la diferencia entre cada opción.
+
+En el selector, muestra:
+- Nombre de la paleta.
+- Una vista previa amplia.
+- Tres o más muestras de sus colores principales.
+- Vista previa del fondo, botones y texto.
+- Indicador de la paleta actualmente seleccionada.
+
+Mantén las cinco paletas iniciales, pero mejora su presentación y contraste.
+
+## 8.1. Editor de paleta personalizada de tres colores
+
+Añade la opción «Crear mi paleta».
+
+Permite seleccionar exactamente tres colores principales:
+1. Color primario.
+2. Color secundario.
+3. Color de acento.
+
+Cada color se puede seleccionar mediante:
+- Cuadrícula visual.
+- Selector de color.
+- Código hexadecimal introducido manualmente.
+
+Ejemplo:
+- Primario: #243B35
+- Secundario: #E5DCCB
+- Acento: #87A878
+
+Los valores anteriores son únicamente un ejemplo de configuración.
+
+La aplicación debe generar una combinación coherente para fondos, tarjetas, botones, selección, bordes y otros elementos a partir de los tres colores.
+
+El usuario debe poder guardar, renombrar, editar, duplicar y eliminar sus paletas personalizadas.
+
+Incluye una vista previa en tiempo real antes de aplicar la paleta.
+
+Valida los códigos de color y advierte cuando exista un problema de contraste. Si es necesario, ajusta automáticamente los colores del texto para mantener la legibilidad, sin cambiar los tres colores elegidos por el usuario.
+
+La paleta de la interfaz no debe reemplazar los colores individuales asignados a puntos, conexiones o categorías.
+
+# 9. CATEGORÍAS DE LA SECCIÓN DETALLES: EDICIÓN Y ORDEN PERSONALIZADO
+
+Actualiza el sistema de categorías de la sección «Detalles».
+
+Mantén las categorías predeterminadas existentes, pero permite modificarlas completamente.
+
+Al final de la lista de categorías debe aparecer un botón con el símbolo «+» para agregar una nueva categoría.
+
+El usuario debe poder:
+- Crear una categoría.
+- Editar el nombre de una categoría predeterminada.
+- Cambiar su color e icono.
+- Cambiar el orden mediante arrastrar y soltar.
+- Eliminar una categoría.
+- Restaurar categorías predeterminadas.
+- Filtrar las fichas por categoría.
+
+El orden seleccionado debe conservarse después de cerrar y volver a abrir la aplicación.
+
+No coloques la opción para agregar categorías en un menú difícil de encontrar: el botón «+» debe estar visible al final de la lista.
+
+Cuando se elimine una categoría que contenga fichas, solicita una decisión:
+- Reasignar las fichas a otra categoría.
+- Dejarlas sin categoría.
+
+Nunca elimines las fichas automáticamente.
+
+Aplica un sistema equivalente de administración de categorías a personajes y acontecimientos, conservando las diferencias necesarias entre cada módulo.
+
+# 10. EXPLICACIÓN INICIAL DE LA SECCIÓN «LIENZO 2D»
+
+Cuando el usuario entre por primera vez a la sección «Lienzo 2D», muestra una explicación breve, visual y fácil de comprender.
+
+El mensaje debe explicar para qué sirve y cómo se utiliza.
+
+Texto sugerido:
+
+«El Lienzo 2D es un espacio visual para organizar y relacionar los elementos de tu historia. Puedes crear puntos para representar acontecimientos, personajes, lugares o ideas, y conectarlos mediante líneas para visualizar sus relaciones. Arrastra los elementos para organizarlos, selecciona uno para consultar sus detalles y utiliza el zoom para explorar el espacio. Tus elementos se pueden relacionar con capítulos, personajes y líneas de tiempo».
+
+Incluye una pequeña demostración interactiva con unos pocos elementos de ejemplo.
+
+Permite:
+- Cerrar la explicación.
+- Volver a consultarla desde un botón de ayuda.
+- Iniciar una demostración guiada opcional.
+
+Los elementos de ejemplo deben identificarse claramente como demostración y no mezclarse con los datos reales del usuario.
+
+No conviertas la explicación en un obstáculo que aparezca en cada visita.
+
+# 11. PERSONALIZACIÓN DE LA TIPOGRAFÍA DE LA PÁGINA
+
+Añade una sección de configuración llamada «Tipografía».
+
+Debe permitir cambiar la fuente general de la interfaz sin modificar automáticamente el formato de los manuscritos.
+
+Incluye:
+- Selector de fuentes disponibles.
+- Vista previa del texto.
+- Ajuste del tamaño general de la interfaz.
+- Configuración de la fuente para títulos y texto de la interfaz, si la arquitectura lo permite.
+- Botón para restaurar la tipografía predeterminada.
+
+La fuente de la interfaz y la fuente de los capítulos deben funcionar de manera independiente.
+
+Cambiar la fuente de la página no debe modificar el contenido ni el formato personalizado de los documentos.
+
+## 11.1. Cargar fuentes personalizadas desde archivos
+
+Permite importar archivos de fuentes desde el dispositivo.
+
+Formatos admitidos:
+- .ttf
+- .otf
+
+Flujo de uso:
+1. El usuario abre «Tipografía».
+2. Pulsa «Agregar fuente».
+3. Selecciona un archivo .ttf o .otf.
+4. La aplicación valida el archivo y su compatibilidad.
+5. Solicita un nombre visible para la fuente cuando sea necesario.
+6. Muestra una vista previa.
+7. Permite aplicarla a la interfaz.
+8. Conserva la configuración y el archivo de la fuente para futuras sesiones.
+
+Cuando el usuario importe varias fuentes, debe poder administrarlas desde una lista.
+
+Incluye opciones para cambiar el nombre visible, previsualizar, activar, desactivar y eliminar una fuente importada.
+
+Si una fuente está en uso, advierte que eliminarla puede provocar que la interfaz utilice una fuente alternativa.
+
+No afirmes que la fuente se ha instalado globalmente en el sistema operativo. La fuente importada solo necesita estar disponible dentro de esta aplicación.
+
+Implementa la carga mediante mecanismos compatibles con el navegador, como la lectura del archivo, la creación de una fuente web local y su registro mediante FontFace o una alternativa apropiada.
+
+Valida los archivos, gestiona los errores y no ejecutes contenido arbitrario de los archivos importados.
+
+Comprueba los permisos y las condiciones de uso antes de distribuir o exportar fuentes con el proyecto.
+
+La persistencia debe ser real. No dependas exclusivamente de una URL temporal o de un objeto de memoria que desaparezca al recargar la página. Si el almacenamiento local no resulta adecuado para archivos de fuentes, utiliza el almacenamiento persistente ya disponible en la aplicación.
+
+# 12. REQUISITOS TÉCNICOS DE LA LÍNEA DE TIEMPO
+
+Inspecciona la tecnología que utiliza actualmente la aplicación y adapta la implementación a ella.
+
+Si el proyecto utiliza React y TypeScript, considera una biblioteca adecuada para diagramas interactivos, como React Flow, junto con un sistema de escalado temporal personalizado.
+
+Si el lienzo necesita renderizar una gran cantidad de puntos y conexiones, considera SVG, Canvas o una arquitectura híbrida, según los requisitos de interacción y rendimiento.
+
+La elección técnica debe satisfacer estos requisitos:
+- Coordenadas temporales independientes de las coordenadas de pantalla.
+- Escalado continuo.
+- Desplazamiento fluido.
+- Eventos de ratón y táctiles.
+- Puntos con identificadores estables.
+- Conexiones vinculadas a nodos reales.
+- Múltiples carriles temporales.
+- Paneles flotantes y plegables.
+- Selección de elementos.
+- Edición sin recargar la página.
+- Guardado persistente.
+- Navegación eficiente entre acontecimientos distantes.
+
+No implementes la infinitud simulando un elemento HTML de dimensiones gigantescas. Utiliza un sistema de coordenadas virtuales con una ventana visible que se actualice conforme el usuario navega.
+
+Para evitar que la aplicación se vuelva lenta, renderiza prioritariamente los elementos visibles y los que están cerca del área de trabajo. No elimines los elementos que estén fuera de la pantalla.
+
+Mantén la lógica de fechas, las relaciones y la representación visual separadas. Cambiar el zoom o la posición del lienzo no debe alterar las fechas de los acontecimientos.
+
+# 13. PERSISTENCIA E INTEGRIDAD DE LOS DATOS
+
+Integra todas las nuevas funciones con los datos existentes.
+
+Asegúrate de que:
+- Los puntos tengan identificadores estables.
+- Las conexiones referencien sus extremos correctamente.
+- Los subpuntos mantengan su jerarquía.
+- Las líneas temporales conserven sus acontecimientos.
+- Las categorías conserven sus asociaciones.
+- Los colores personalizados se mantengan.
+- Las paletas personalizadas se guarden.
+- Las fuentes importadas puedan recuperarse.
+- La configuración del lienzo se conserve.
+- Las modificaciones se guarden sin perder información.
+- Los datos de libros diferentes permanezcan separados.
+
+Si modificas el esquema de datos, implementa una migración compatible con los proyectos existentes.
+
+No borres datos ni reinicies la base de datos para realizar esta actualización.
+
+# 14. PRUEBAS DE ACEPTACIÓN OBLIGATORIAS
+
+Antes de terminar, verifica que:
+
+1. Puedo desplazarme indefinidamente hacia el pasado y el futuro sin encontrar límites artificiales.
+2. Puedo acercarme desde una vista de siglos hasta una vista de una hora y regresar a la vista de años.
+3. Puedo cambiar entre línea simple, líneas temporales paralelas y eje cronológico adaptable.
+4. Puedo crear varios carriles dentro de una misma historia.
+5. Puedo ocultar y mostrar cada carril.
+6. Los puntos aparecen sin descripciones permanentes.
+7. Al seleccionar un punto, aparece su nombre y puedo consultar toda su información.
+8. Las conexiones se muestran como líneas reales y permanecen unidas a sus puntos.
+9. Puedo crear cadenas de conexiones de hasta cinco puntos mediante la herramienta de creación rápida.
+10. Puedo abrir y cerrar independientemente los dos paneles auxiliares.
+11. Puedo crear un punto desde el panel y situarlo manualmente o mediante su fecha.
+12. Puedo seleccionar colores de una cuadrícula y utilizar colores personalizados.
+13. Puedo crear categorías adicionales para personajes.
+14. Puedo cambiar el orden de las categorías de detalles y agregar otras mediante el botón «+».
+15. Puedo crear una paleta de tres colores y guardar sus códigos hexadecimales.
+16. Puedo importar fuentes .ttf y .otf y conservarlas al volver a abrir la aplicación.
+17. La explicación del Lienzo 2D aparece cuando corresponde y se puede consultar después.
+18. Todas las funciones anteriores continúan operativas después de recargar la aplicación.
+19. No se pierden datos al cambiar de modo, ocultar paneles o salir del modo ampliado.
+20. La aplicación sigue siendo utilizable en pantallas pequeñas y con dispositivos táctiles.
+
+# 15. INSTRUCCIÓN FINAL
+
+Implementa estas mejoras en el proyecto existente y no te limites a describir cómo podrían hacerse.
+
+Antes de modificar el código, revisa la arquitectura actual. Después implementa los cambios de manera incremental, comprueba su funcionamiento y corrige los errores.
+
+No elimines funciones existentes, no dupliques módulos y no sustituyas la línea de tiempo funcional por una imagen o un prototipo estático.
+
+Si una función requiere una migración de datos, un servicio externo o una configuración adicional, identifícala claramente y realiza la implementación compatible que sea posible.
+
+Al terminar, indica:
+- Qué componentes modificaste.
+- Qué funciones están realmente implementadas.
+- Qué pruebas ejecutaste.
+- Qué limitaciones siguen pendientes.
+- Cómo iniciar y probar la aplicación.
+
+La prioridad es una línea de tiempo amplia, navegable, interactiva y flexible, capaz de organizar historias complejas sin perder la claridad visual ni la integridad de los datos.
